@@ -1,0 +1,36 @@
+{
+    "name"       : "bugotech/view",
+    "description": "The Bugotech View package.",
+    "homepage"   : "http://www.netforce.com.br",
+    "license"    : "GPL v.3",
+
+    "authors": [
+        {
+            "name" : "Bruno Gonçalves",
+            "email": "bugotech@gmail.com"
+        }
+    ],
+
+    "require": {
+        "illuminate/view"    : "5.2.*"
+    },
+
+    "autoload": {
+        "psr-4": {
+            "Bugotech\\View\\": "src/"
+        },
+        "files": [
+            "src/helpers.php"
+        ]
+    },
+
+    "repositories": [
+        {
+            "type": "vcs",
+            "url" : "D:\\fontes\\bugotech\\foundation"
+        }
+    ],
+
+    "minimum-stability": "dev",
+    "prefer-stable"    : true
+}
