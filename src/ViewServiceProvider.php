@@ -1,5 +1,6 @@
 <?php namespace Bugotech\View;
 
+use Illuminate\Support\Arr;
 use Illuminate\View\FileViewFinder;
 
 class ViewServiceProvider extends \Illuminate\View\ViewServiceProvider
@@ -12,14 +13,39 @@ class ViewServiceProvider extends \Illuminate\View\ViewServiceProvider
     public function registerViewFinder()
     {
         $this->app->bind('view.finder', function ($app) {
-            $paths = $app['config']['view.paths'];
-            if (is_null($paths)) {
-                $paths = realpath(base_path('resources/views'));
-                $app['config']->set('view.paths', $paths);
-                $app['config']->set('view.compiled', realpath(storage_path('framework/views')));
-            }
+            $paths = $this->preparePaths();
 
             return new FileViewFinder($app['files'], $paths);
         });
+    }
+
+    /**
+     * Preparar pastas e retornar a lista de paths.
+     * @return array
+     */
+    protected function preparePaths()
+    {
+        $info = $this->app['files']->getRequire(__DIR__ . '/../config/view.php');
+        $list = [];
+
+        $paths = $this->app['config']['view.paths'];
+        if (is_null($paths)) {
+            $paths = Arr::get($info, 'paths', []);
+            $this->app['config']->set('view.paths', $paths);
+            $list = array_merge([], $list, $paths);
+        }
+
+        $compiled = $this->app['config']['view.compiled'];
+        if (is_null($compiled)) {
+            $compiled = Arr::get($info, 'compiled', []);
+            $this->app['config']->set('view.compiled', $compiled);
+            $list = array_merge([], $list, [$compiled]);
+        }
+
+        foreach ($list as $dir) {
+            $this->app['files']->force($dir);
+        }
+
+        return $paths;
     }
 }
