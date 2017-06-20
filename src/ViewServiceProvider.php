@@ -26,24 +26,17 @@ class ViewServiceProvider extends \Illuminate\View\ViewServiceProvider
     protected function preparePaths()
     {
         $info = $this->app['files']->getRequire(__DIR__ . '/../config/view.php');
-        $list = [];
 
         $paths = $this->app['config']['view.paths'];
         if (is_null($paths)) {
             $paths = Arr::get($info, 'paths', []);
             $this->app['config']->set('view.paths', $paths);
-            $list = array_merge([], $list, $paths);
         }
 
         $compiled = $this->app['config']['view.compiled'];
         if (is_null($compiled)) {
             $compiled = Arr::get($info, 'compiled', []);
             $this->app['config']->set('view.compiled', $compiled);
-            $list = array_merge([], $list, [$compiled]);
-        }
-
-        foreach ($list as $dir) {
-            $this->app['files']->force($dir);
         }
 
         return $paths;
