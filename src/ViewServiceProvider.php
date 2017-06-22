@@ -5,6 +5,18 @@ use Illuminate\View\FileViewFinder;
 class ViewServiceProvider extends \Illuminate\View\ViewServiceProvider
 {
     /**
+     * Register the service provider.
+     *
+     * @return void
+     */
+    public function register()
+    {
+        parent::register();
+
+        $this->app->alias('Illuminate\Contracts\View\Factory', 'view');
+    }
+
+    /**
      * Register the view finder implementation.
      *
      * @return void
