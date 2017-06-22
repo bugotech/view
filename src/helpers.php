@@ -11,7 +11,7 @@ if (! function_exists('view')) {
      */
     function view($view = null, $data = [], $mergeData = [])
     {
-        $factory = app('Illuminate\Contracts\View\Factory');
+        $factory = app('\Illuminate\Contracts\View\Factory');
 
         if (func_num_args() === 0) {
             return $factory;
