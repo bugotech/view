@@ -20,3 +20,16 @@ if (! function_exists('view')) {
         return $factory->make($view, $data, $mergeData);
     }
 }
+
+if (! function_exists('blade')) {
+    /**
+     * Blade.
+     * @return Illuminate\View\Compilers\BladeCompiler
+     */
+    function blade()
+    {
+        $blade = app('blade.compiler');
+
+        return $blade;
+    }
+}

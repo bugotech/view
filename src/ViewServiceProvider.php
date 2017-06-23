@@ -17,6 +17,18 @@ class ViewServiceProvider extends \Illuminate\View\ViewServiceProvider
     }
 
     /**
+     * Boot.
+     */
+    public function boot()
+    {
+        if (function_exists('i18n')) {
+            blade()->directive('trans', function ($expr) {
+                return "<?php echo i18n('$expr'); ?>";
+            });
+        }
+    }
+
+    /**
      * Register the view finder implementation.
      *
      * @return void
