@@ -30,7 +30,7 @@ class ViewServiceProvider extends \Illuminate\View\ViewServiceProvider
 
         if (function_exists('i18n')) {
             blade()->directive('trans', function ($expr) {
-                return "<?php echo i18n('$expr'); ?>";
+                return "<?php echo i18n'$expr'; ?>";
             });
         }
     }
