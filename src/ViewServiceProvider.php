@@ -17,10 +17,15 @@ class ViewServiceProvider extends \Illuminate\View\ViewServiceProvider
     }
 
     /**
-     * Boot.
+     * Register the Blade engine implementation.
+     *
+     * @param  \Illuminate\View\Engines\EngineResolver  $resolver
+     * @return void
      */
-    public function boot()
+    public function registerBladeEngine($resolver)
     {
+        parent::registerBladeEngine($resolver);
+
         if (function_exists('i18n')) {
             blade()->directive('trans', function ($expr) {
                 return "<?php echo i18n('$expr'); ?>";
