@@ -11,6 +11,8 @@ class ViewServiceProvider extends \Illuminate\View\ViewServiceProvider
      */
     public function register()
     {
+        $this->app->configure('view', __DIR__ . '/../config/view.php');
+
         parent::register();
 
         $this->app->alias('view', '\Illuminate\Contracts\View\Factory');
