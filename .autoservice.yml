@@ -1,4 +1,5 @@
 auto-service: bugotech.view
+priorory: 200
 
 services:
  - \Bugotech\View\ViewServiceProvider
