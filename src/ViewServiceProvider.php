@@ -15,7 +15,7 @@ class ViewServiceProvider extends \Illuminate\View\ViewServiceProvider
 
         parent::register();
 
-        $this->app->alias('view', '\Illuminate\Contracts\View\Factory');
+        $this->app->alias('view', 'Illuminate\Contracts\View\Factory');
     }
 
     /**
